@@ -1,1 +1,1 @@
-<img src="sarthak.svg?raw=true" alt="Your Name - Developer Portfolio Banner">
+<img src="sarthk.svg?raw=true" alt="Your Name - Developer Portfolio Banner">
