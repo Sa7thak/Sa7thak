@@ -1,1 +1,26 @@
+name: self-update readme
 
+on:
+  schedule:
+    - cron: "0 3 * * *"   # every day at 08:30 IST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  rewrite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run self-update script
+        run: python3 scripts/update_readme.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "sa7thak-bot"
+          git config user.email "actions@github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "chore: readme self-updated its own content [skip ci]"
+          git push
