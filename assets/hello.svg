@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 610" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient & Aurora Mesh -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="50%" stop-color="#0b0f19" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <radialGradient id="aurora-cyan" cx="20%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="aurora-purple" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#9b51e0" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- UI Gradients -->
+    <linearGradient id="cyan-glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="100%" stop-color="#4facfe" />
+    </linearGradient>
+    <linearGradient id="glass-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="pill-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="matrix-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0" />
+      <stop offset="50%" stop-color="#10b981" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#059669" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="soft-blur">
+      <feGaussianBlur stdDeviation="40" />
+    </filter>
+
+    <!-- Clip Paths -->
+    <clipPath id="left-pane-clip">
+      <rect x="40" y="40" width="380" height="530" rx="16" />
+    </clipPath>
+    <clipPath id="terminal-clip">
+      <rect x="450" y="40" width="690" height="530" rx="16" />
+    </clipPath>
+
+    <!-- Styles -->
+    <style>
+      .font-mono { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
+      .font-sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .title-text { font-size: 28px; font-weight: 800; fill: #f8fafc; letter-spacing: -0.5px; }
+      .role-text { font-size: 18px; font-weight: 600; fill: #00f2fe; }
+      .body-text { font-size: 14px; fill: #94a3b8; }
+      .label-text { font-size: 12px; font-weight: 700; fill: #64748b; letter-spacing: 1px; text-transform: uppercase; }
+      .pill-text { font-size: 12.5px; font-weight: 600; fill: #e2e8f0; }
+      .matrix-text { font-size: 13px; font-family: monospace; fill: #10b981; }
+      
+      /* Micro CSS animations for elements that benefit from hardware acceleration */
+      @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+      .animate-pulse { animation: pulse 4s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- BASE BACKGROUND -->
+  <rect width="1180" height="610" fill="url(#bg-grad)" />
+  <circle cx="200" cy="150" r="250" fill="url(#aurora-cyan)" filter="url(#soft-blur)">
+    <animate attributeName="cx" values="200;250;200" dur="15s" repeatCount="indefinite" />
+    <animate attributeName="cy" values="150;180;150" dur="12s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="950" cy="450" r="300" fill="url(#aurora-purple)" filter="url(#soft-blur)">
+    <animate attributeName="cx" values="950;900;950" dur="18s" repeatCount="indefinite" />
+    <animate attributeName="cy" values="450;400;450" dur="14s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Background Technical Grid -->
+  <g stroke="#ffffff" stroke-width="1" opacity="0.03">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="none" />
+      <path d="M 40 0 L 0 0 0 40" fill="none" />
+    </pattern>
+    <rect width="1180" height="610" fill="url(#grid)" />
+  </g>
+
+  <!-- Floating Parallax Particles -->
+  <g fill="#00f2fe" opacity="0.3">
+    <circle cx="120" cy="90" r="1.5"><animate attributeName="cy" values="90;70;90" dur="6s" repeatCount="indefinite" /></circle>
+    <circle cx="410" cy="580" r="2"><animate attributeName="cy" values="580;560;580" dur="8s" repeatCount="indefinite" /></circle>
+    <circle cx="850" cy="70" r="1"><animate attributeName="cy" values="70;90;70" dur="7s" repeatCount="indefinite" /></circle>
+    <circle cx="1110" cy="520" r="1.5"><animate attributeName="cy" values="520;500;520" dur="9s" repeatCount="indefinite" /></circle>
+  </g>
+
+  <!-- ================= LEFT PANE: CYBERPUNK HUD & ASCII PORTRAIT ================= -->
+  <g transform="translate(0, 0)">
+    <!-- Glass Background -->
+    <rect x="40" y="40" width="380" height="530" rx="16" fill="#0f172a" fill-opacity="0.4" stroke="url(#glass-stroke)" stroke-width="1.5" />
+    
+    <!-- Matrix Code Rain & Cyber Canvas -->
+    <g clip-path="url(#left-pane-clip)" opacity="0.8">
+      <!-- Matrix Rain Columns -->
+      <g class="matrix-text" opacity="0.3">
+        <text x="70" y="0">01001001 01001110 01010100<animate attributeName="y" values="-100;650" dur="8s" repeatCount="indefinite" /></text>
+        <text x="130" y="0">11010010 01100101 10110101<animate attributeName="y" values="-200;650" dur="6s" repeatCount="indefinite" /></text>
+        <text x="190" y="0">SYS_INIT 0x8F4E DAT_STREAM<animate attributeName="y" values="-50;650" dur="9s" repeatCount="indefinite" /></text>
+        <text x="250" y="0">10101100 11001010 00110011<animate attributeName="y" values="-150;650" dur="7s" repeatCount="indefinite" /></text>
+        <text x="310" y="0">CONNECT_ OK_ AI_AGENT_RUN<animate attributeName="y" values="-250;650" dur="10s" repeatCount="indefinite" /></text>
+      </g>
+
+      <!-- Cyberpunk HUD Rings -->
+      <g transform="translate(230, 250)">
+        <circle r="120" fill="none" stroke="#00f2fe" stroke-width="1" stroke-dasharray="10 15 40 15" opacity="0.2">
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="25s" repeatCount="indefinite" />
+        </circle>
+        <circle r="95" fill="none" stroke="#9b51e0" stroke-width="1.5" stroke-dasharray="40 30 10 30" opacity="0.3">
+          <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="20s" repeatCount="indefinite" />
+        </circle>
+        <circle r="70" fill="none" stroke="#10b981" stroke-width="1" stroke-dasharray="5 5" opacity="0.25">
+          <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="30s" repeatCount="indefinite" />
+        </circle>
+      </g>
+
+      <!-- Stylized ASCII Art / Cyber Avatar -->
+      <g class="font-mono" font-size="11" fill="#00f2fe" font-weight="bold" text-anchor="middle" opacity="0.85" transform="translate(230, 185)">
+        <text y="0" fill="#38bdf8">      _.--""--._      </text>
+        <text y="14" fill="#38bdf8">    .'          `.    </text>
+        <text y="28" fill="#38bdf8">   /   O      O   \   </text>
+        <text y="42" fill="#00f2fe">  |    \  ^^  /    |  </text>
+        <text y="56" fill="#00f2fe">  \     `'--'`     /  </text>
+        <text y="70" fill="#0284c7">   `.            .'   </text>
+        <text y="84" fill="#0284c7">     `-._    _.-'     </text>
+        <text y="98" fill="#0369a1">    _.-""`""`""-._    </text>
+        <text y="112" fill="#0369a1">  .'     DATA     `.  </text>
+        <text y="126" fill="#0284c7"> /     SYSTEMS      \ </text>
+        <text y="140" fill="#38bdf8">|   AI &amp; BACKEND     |</text>
+      </g>
+
+      <!-- HUD Crosshairs & Target Elements -->
+      <path d="M 60 70 L 80 70 M 60 70 L 60 90" stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.6" />
+      <path d="M 400 70 L 380 70 M 400 70 L 400 90" stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.6" />
+      <path d="M 60 500 L 80 500 M 60 500 L 60 480" stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.6" />
+      <path d="M 400 500 L 380 500 M 400 500 L 400 480" stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.6" />
+
+      <!-- Scanline Effect -->
+      <rect x="40" y="0" width="380" height="4" fill="#00f2fe" opacity="0.3" filter="url(#glow)">
+        <animate attributeName="y" values="40;570;40" dur="6s" repeatCount="indefinite" />
+      </rect>
+    </g>
+
+    <!-- Left Pane Footer Info -->
+    <g transform="translate(70, 500)" class="font-mono" font-size="12" fill="#64748b">
+      <text x="0" y="0"><tspan fill="#00f2fe">►</tspan> STATUS: <tspan fill="#10b981">ONLINE</tspan></text>
+      <text x="0" y="20"><tspan fill="#00f2fe">►</tspan> LOC: PUNE, INDIA [21.14°N, 73.85°E]</text>
+      <text x="0" y="40"><tspan fill="#00f2fe">►</tspan> SPECIALIZATION: <tspan fill="#f8fafc">AI &amp; BACKEND</tspan></text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT PANE: GLASS TERMINAL & DATA ================= -->
+  <g transform="translate(0, 0)">
+    <!-- Terminal Window Container -->
+    <rect x="450" y="40" width="690" height="530" rx="16" fill="#0b0f19" fill-opacity="0.6" stroke="url(#glass-stroke)" stroke-width="1.5" />
+
+    <!-- Terminal Header / macOS Controls -->
+    <path d="M 450 80 L 1140 80" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+    <g transform="translate(480, 60)">
+      <circle cx="0" cy="0" r="6" fill="#ff5f56" />
+      <circle cx="20" cy="0" r="6" fill="#ffbd2e" />
+      <circle cx="40" cy="0" r="6" fill="#27c93f" />
+      <text x="315" y="4" class="font-mono" font-size="13" fill="#64748b" text-anchor="middle">sarthak@dherange:~ — -zsh — 80×24</text>
+    </g>
+
+    <!-- Terminal Content Area -->
+    <g transform="translate(490, 120)" clip-path="url(#terminal-clip)">
+      
+      <!-- Greeting Sequence -->
+      <g class="font-mono">
+        <text x="0" y="0" font-size="14" fill="#64748b">$ <tspan fill="#f8fafc">./init_profile.sh --greeting</tspan></text>
+        
+        <!-- Main Title & Typing Cursor -->
+        <g transform="translate(0, 35)">
+          <text x="0" y="0" class="font-sans title-text">Hello, World! I am <tspan fill="url(#cyan-glow)">Sarthak Dherange</tspan></text>
+          <!-- Animated Blinking Cursor -->
+          <rect x="425" y="-22" width="12" height="26" fill="#00f2fe" rx="2">
+            <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite" />
+          </rect>
+        </g>
+      </g>
+
+      <!-- Animated Rotating Roles (SMIL Sequential Visibility) -->
+      <g transform="translate(0, 85)" class="font-mono role-text">
+        <text x="0" y="0" opacity="0">
+          > AI &amp; Data Science Engineering Student
+          <animate attributeName="opacity" values="0;1;1;0;0;0;0;0;0;0" dur="15s" repeatCount="indefinite" />
+        </text>
+        <text x="0" y="0" opacity="0" fill="#a855f7">
+          > High-Performance Backend Developer
+          <animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" dur="15s" repeatCount="indefinite" />
+        </text>
+        <text x="0" y="0" opacity="0" fill="#38bdf8">
+          > MERN Stack Architecture Architect
+          <animate attributeName="opacity" values="0;0;0;0;0;1;1;0;0;0" dur="15s" repeatCount="indefinite" />
+        </text>
+        <text x="0" y="0" opacity="0" fill="#10b981">
+          > Cloud &amp; Distributed Systems Enthusiast
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0;1;1;0" dur="15s" repeatCount="indefinite" />
+        </text>
+        <text x="0" y="0" opacity="0" fill="#f59e0b">
+          > Open Source Contributor &amp; Learner
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0;1" dur="15s" repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <!-- Divider -->
+      <path d="M 0 115 L 610 115" stroke="#ffffff" stroke-opacity="0.08" stroke-dasharray="4 4" />
+
+      <!-- Profile Details Grid -->
+      <g transform="translate(0, 140)" class="font-sans">
+        <!-- Education -->
+        <g transform="translate(0, 0)">
+          <text class="label-text" x="0" y="0">Education &amp; Standing</text>
+          <text class="body-text" x="0" y="22"><tspan fill="#f8fafc" font-weight="600">3rd Year B.E.</tspan> in Artificial Intelligence &amp; Data Science</text>
+          <text class="body-text font-mono" x="0" y="42" fill="#10b981">► Academic Performance: 8.86 SGPA</text>
+        </g>
+        
+        <!-- Current Focus -->
+        <g transform="translate(320, 0)">
+          <text class="label-text" x="0" y="0">Current Focus &amp; Research</text>
+          <text class="body-text" x="0" y="22"><tspan fill="#f8fafc" font-weight="600">System Design</tspan>, Autonomous AI Agents &amp; Databases</text>
+          <text class="body-text font-mono" x="0" y="42" fill="#a855f7">► Building Scalable Backend Architectures</text>
+        </g>
+      </g>
+
+      <!-- Skills Section Header -->
+      <g transform="translate(0, 220)">
+        <text class="label-text" x="0" y="0">Technical Arsenal &amp; Capabilities</text>
+        
+        <!-- SKILLS PILLS GRID -->
+        <g transform="translate(0, 15)">
+          <!-- Row 1: Core Languages & Backend -->
+          <g transform="translate(0, 0)">
+            <!-- Java -->
+            <g transform="translate(0, 0)"><rect width="70" height="30" rx="6" fill="url(#pill-grad)" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="35" y="19" text-anchor="middle">Java</text></g>
+            <!-- Python -->
+            <g transform="translate(80, 0)"><rect width="80" height="30" rx="6" fill="url(#pill-grad)" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="40" y="19" text-anchor="middle">Python</text></g>
+            <!-- C++ -->
+            <g transform="translate(170, 0)"><rect width="60" height="30" rx="6" fill="url(#pill-grad)" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="30" y="19" text-anchor="middle">C++</text></g>
+            <!-- JavaScript -->
+            <g transform="translate(240, 0)"><rect width="105" height="30" rx="6" fill="url(#pill-grad)" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="52.5" y="19" text-anchor="middle">JavaScript</text></g>
+            <!-- Node.js -->
+            <g transform="translate(355, 0)"><rect width="85" height="30" rx="6" fill="url(#pill-grad)" stroke="#10b981" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="42.5" y="19" text-anchor="middle" fill="#34d399">Node.js</text></g>
+            <!-- Express -->
+            <g transform="translate(450, 0)"><rect width="80" height="30" rx="6" fill="url(#pill-grad)" stroke="#10b981" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="40" y="19" text-anchor="middle">Express</text></g>
+            <!-- React -->
+            <g transform="translate(540, 0)"><rect width="70" height="30" rx="6" fill="url(#pill-grad)" stroke="#00f2fe" stroke-width="1" stroke-opacity="0.5" /><text class="pill-text font-mono" x="35" y="19" text-anchor="middle" fill="#38bdf8">React</text></g>
+          </g>
+
+          <!-- Row 2: Databases, Cloud & DevOps -->
+          <g transform="translate(0, 42)">
+            <!-- MongoDB -->
+            <g transform="translate(0, 0)"><rect width="90" height="30" rx="6" fill="url(#pill-grad)" stroke="#10b981" stroke-width="1" stroke-opacity="0.5" /><text class="pill-text font-mono" x="45" y="19" text-anchor="middle" fill="#34d399">MongoDB</text></g>
+            <!-- MySQL -->
+            <g transform="translate(100, 0)"><rect width="75" height="30" rx="6" fill="url(#pill-grad)" stroke="#a855f7" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="37.5" y="19" text-anchor="middle">MySQL</text></g>
+            <!-- Redis -->
+            <g transform="translate(185, 0)"><rect width="70" height="30" rx="6" fill="url(#pill-grad)" stroke="#ef4444" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="35" y="19" text-anchor="middle" fill="#f87171">Redis</text></g>
+            <!-- Docker -->
+            <g transform="translate(265, 0)"><rect width="80" height="30" rx="6" fill="url(#pill-grad)" stroke="#00f2fe" stroke-width="1" stroke-opacity="0.5" /><text class="pill-text font-mono" x="40" y="19" text-anchor="middle" fill="#38bdf8">Docker</text></g>
+            <!-- AWS -->
+            <g transform="translate(355, 0)"><rect width="65" height="30" rx="6" fill="url(#pill-grad)" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.5" /><text class="pill-text font-mono" x="32.5" y="19" text-anchor="middle" fill="#fbbf24">AWS</text></g>
+            <!-- Linux -->
+            <g transform="translate(430, 0)"><rect width="70" height="30" rx="6" fill="url(#pill-grad)" stroke="#e2e8f0" stroke-width="1" stroke-opacity="0.3" /><text class="pill-text font-mono" x="35" y="19" text-anchor="middle">Linux</text></g>
+            <!-- Git -->
+            <g transform="translate(510, 0)"><rect width="60" height="30" rx="6" fill="url(#pill-grad)" stroke="#ef4444" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="30" y="19" text-anchor="middle">Git</text></g>
+          </g>
+
+          <!-- Row 3: Arch & Protocols -->
+          <g transform="translate(0, 84)">
+            <!-- REST APIs -->
+            <g transform="translate(0, 0)"><rect width="95" height="30" rx="6" fill="url(#pill-grad)" stroke="#94a3b8" stroke-width="1" stroke-opacity="0.3" /><text class="pill-text font-mono" x="47.5" y="19" text-anchor="middle">REST APIs</text></g>
+            <!-- Socket.IO -->
+            <g transform="translate(105, 0)"><rect width="95" height="30" rx="6" fill="url(#pill-grad)" stroke="#f8fafc" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="47.5" y="19" text-anchor="middle">Socket.IO</text></g>
+            <!-- JWT -->
+            <g transform="translate(210, 0)"><rect width="60" height="30" rx="6" fill="url(#pill-grad)" stroke="#a855f7" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="30" y="19" text-anchor="middle">JWT</text></g>
+            <!-- OAuth -->
+            <g transform="translate(280, 0)"><rect width="75" height="30" rx="6" fill="url(#pill-grad)" stroke="#a855f7" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="37.5" y="19" text-anchor="middle">OAuth</text></g>
+            <!-- Tailwind -->
+            <g transform="translate(365, 0)"><rect width="90" height="30" rx="6" fill="url(#pill-grad)" stroke="#06b6d4" stroke-width="1" stroke-opacity="0.5" /><text class="pill-text font-mono" x="45" y="19" text-anchor="middle" fill="#22d3ee">Tailwind</text></g>
+            <!-- CI/CD -->
+            <g transform="translate(465, 0)"><rect width="80" height="30" rx="6" fill="url(#pill-grad)" stroke="#10b981" stroke-width="1" stroke-opacity="0.4" /><text class="pill-text font-mono" x="40" y="19" text-anchor="middle">CI/CD</text></g>
+          </g>
+        </g>
+      </g>
+
+      <!-- SOCIALS & LINKS FOOTER -->
+      <g transform="translate(0, 365)">
+        <path d="M 0 0 L 610 0" stroke="#ffffff" stroke-opacity="0.08" />
+        <g transform="translate(0, 15)" class="font-mono" font-size="13">
+          <text x="0" y="15" fill="#64748b">CONNECT_VIA: </text>
+          
+          <!-- GitHub -->
+          <g transform="translate(110, 0)">
+            <rect width="90" height="26" rx="4" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.1" />
+            <text x="45" y="17" fill="#f8fafc" text-anchor="middle" font-weight="600">GitHub</text>
+          </g>
+          <!-- LinkedIn -->
+          <g transform="translate(210, 0)">
+            <rect width="90" height="26" rx="4" fill="#0077b5" fill-opacity="0.1" stroke="#0077b5" stroke-opacity="0.4" />
+            <text x="45" y="17" fill="#38bdf8" text-anchor="middle" font-weight="600">LinkedIn</text>
+          </g>
+          <!-- LeetCode -->
+          <g transform="translate(310, 0)">
+            <rect width="90" height="26" rx="4" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-opacity="0.4" />
+            <text x="45" y="17" fill="#fbbf24" text-anchor="middle" font-weight="600">LeetCode</text>
+          </g>
+          <!-- HackerRank -->
+          <g transform="translate(410, 0)">
+            <rect width="100" height="26" rx="4" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-opacity="0.4" />
+            <text x="50" y="17" fill="#34d399" text-anchor="middle" font-weight="600">HackerRank</text>
+          </g>
+          <!-- Email -->
+          <g transform="translate(520, 0)">
+            <rect width="85" height="26" rx="4" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" stroke-opacity="0.4" />
+            <text x="42.5" y="17" fill="#f87171" text-anchor="middle" font-weight="600">Email</text>
+          </g>
+        </g>
+      </g>
+
+    </g>
+  </g>
+</svg>
